@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		0EA3CB05289E8F1200BE3E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3CB04289E8F1200BE3E5D /* AppDelegate.swift */; };
 		0EA3CB07289E8F1200BE3E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3CB06289E8F1200BE3E5D /* SceneDelegate.swift */; };
-		0EA3CB09289E8F1200BE3E5D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3CB08289E8F1200BE3E5D /* ViewController.swift */; };
 		0EA3CB0C289E8F1200BE3E5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EA3CB0A289E8F1200BE3E5D /* Main.storyboard */; };
 		0EA3CB0E289E8F1F00BE3E5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EA3CB0D289E8F1F00BE3E5D /* Assets.xcassets */; };
 		0EA3CB11289E8F1F00BE3E5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EA3CB0F289E8F1F00BE3E5D /* LaunchScreen.storyboard */; };
+		0EA3CB19289E8F9000BE3E5D /* MultipleColumnTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3CB18289E8F9000BE3E5D /* MultipleColumnTableViewController.swift */; };
+		0EA3CB1B289E915300BE3E5D /* MultipleColumnLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3CB1A289E915300BE3E5D /* MultipleColumnLayout.swift */; };
+		0EA3CB1D289E9F4200BE3E5D /* MultipleColumnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA3CB1C289E9F4100BE3E5D /* MultipleColumnCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0EA3CB01289E8F1200BE3E5D /* MultiColumnTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiColumnTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EA3CB04289E8F1200BE3E5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EA3CB06289E8F1200BE3E5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0EA3CB08289E8F1200BE3E5D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0EA3CB0B289E8F1200BE3E5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0EA3CB0D289E8F1F00BE3E5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0EA3CB10289E8F1F00BE3E5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0EA3CB12289E8F1F00BE3E5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0EA3CB18289E8F9000BE3E5D /* MultipleColumnTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleColumnTableViewController.swift; sourceTree = "<group>"; };
+		0EA3CB1A289E915300BE3E5D /* MultipleColumnLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleColumnLayout.swift; sourceTree = "<group>"; };
+		0EA3CB1C289E9F4100BE3E5D /* MultipleColumnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleColumnCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +62,9 @@
 			children = (
 				0EA3CB04289E8F1200BE3E5D /* AppDelegate.swift */,
 				0EA3CB06289E8F1200BE3E5D /* SceneDelegate.swift */,
-				0EA3CB08289E8F1200BE3E5D /* ViewController.swift */,
+				0EA3CB18289E8F9000BE3E5D /* MultipleColumnTableViewController.swift */,
+				0EA3CB1C289E9F4100BE3E5D /* MultipleColumnCell.swift */,
+				0EA3CB1A289E915300BE3E5D /* MultipleColumnLayout.swift */,
 				0EA3CB0A289E8F1200BE3E5D /* Main.storyboard */,
 				0EA3CB0D289E8F1F00BE3E5D /* Assets.xcassets */,
 				0EA3CB0F289E8F1F00BE3E5D /* LaunchScreen.storyboard */,
@@ -138,9 +144,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EA3CB09289E8F1200BE3E5D /* ViewController.swift in Sources */,
 				0EA3CB05289E8F1200BE3E5D /* AppDelegate.swift in Sources */,
+				0EA3CB1B289E915300BE3E5D /* MultipleColumnLayout.swift in Sources */,
 				0EA3CB07289E8F1200BE3E5D /* SceneDelegate.swift in Sources */,
+				0EA3CB19289E8F9000BE3E5D /* MultipleColumnTableViewController.swift in Sources */,
+				0EA3CB1D289E9F4200BE3E5D /* MultipleColumnCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +302,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -321,6 +330,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
