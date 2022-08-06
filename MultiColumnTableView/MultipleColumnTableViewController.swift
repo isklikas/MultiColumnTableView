@@ -10,12 +10,12 @@ import UIKit
 private let reuseIdentifier = "MultipleColumnCell"
 
 class MultipleColumnTableViewController: UICollectionViewController {
-    let dataSourceKeys: [String] = ["Name", "City", "Color"];
-    var dataSourceDictionary:[String: Array] = ["Name":["John", "Mitch", "Kelly"], "City":["Athens", "Tel Aviv", "Patras"], "Color":["Red", "Blue", "Green"]];
+    let dataSourceKeys: [String] = ["Name", "City", "Color", "Country"];
+    var dataSourceDictionary:[String: Array] = ["Name":["John", "Mitch", "Kelly", "Alex"], "City":["Athens", "Tel Aviv", "Patras", "Paris"], "Color":["Red", "Blue", "Green", "Yellow"], "Country":["Greece", "Israel", "Greece", "France"]];
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -37,6 +37,17 @@ class MultipleColumnTableViewController: UICollectionViewController {
         //Configure Custom Layout
         let multipleColumnView = self.collectionView;
         let multipleColumnsLayout = MultipleColumnLayout();
+        
+        //In case the items are not enough to fill the screen, the cell size should be changed.
+        let screenWidth = UIScreen.main.bounds.width;
+        let defaultCellWidth = multipleColumnsLayout.CELL_WIDTH;
+        let widthNeeded = defaultCellWidth * CGFloat(dataSourceKeys.count);
+        
+        if (widthNeeded < screenWidth) {
+            let configuredWidth = screenWidth / CGFloat(dataSourceKeys.count);
+            multipleColumnsLayout.CELL_WIDTH = configuredWidth;
+        }
+        
         multipleColumnView?.setCollectionViewLayout(multipleColumnsLayout, animated: false);
     }
 
@@ -64,6 +75,7 @@ class MultipleColumnTableViewController: UICollectionViewController {
             let cellLabel = UILabel(frame: CGRect(x: 0, y: 0, width: cellFrame.width, height: cellFrame.height));
             cell.addSubview(cellLabel);
             cell.textLabel = cellLabel;
+            cell.textLabel?.textAlignment = .center;
         }
     
         //While this works, dictionaryKeys have a random order, so we need a keys array to preserve our order
@@ -76,13 +88,15 @@ class MultipleColumnTableViewController: UICollectionViewController {
             //Bold System blue on a white background has a more modern look than white text on gray backgrounds
             //cell.backgroundColor = UIColor.darkGray
             cell.textLabel?.textColor = UIColor.systemBlue
-            cell.textLabel!.font = UIFont.boldSystemFont(ofSize: cell.textLabel!.font.pointSize);
+            let headerFont = UIFont.boldSystemFont(ofSize: 17.0);
+            cell.textLabel!.font = headerFont;
             currentColumnArray = dataSourceKeys;
         
         } else {
             cell.backgroundColor = UIColor.white
             cell.textLabel?.textColor = UIColor.black
-            cell.textLabel!.font = UIFont.systemFont(ofSize: cell.textLabel!.font.pointSize);
+            let tableFont = UIFont.systemFont(ofSize: 15.0);
+            cell.textLabel!.font = tableFont;
             //Get the first item for every key
             for currentKey in dataSourceKeys {
                 let arrayForItem = dataSourceDictionary[currentKey];
