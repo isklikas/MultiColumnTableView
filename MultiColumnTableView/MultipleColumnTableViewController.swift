@@ -10,6 +10,8 @@ import UIKit
 private let reuseIdentifier = "MultipleColumnCell"
 
 class MultipleColumnTableViewController: UICollectionViewController {
+    let dataSourceKeys: [String] = ["Name", "City", "Color"];
+    var dataSourceDictionary:[String: Array] = ["Name":["John", "Mitch", "Kelly"], "City":["Athens", "Tel Aviv", "Patras"], "Color":["Red", "Blue", "Green"]];
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +42,17 @@ class MultipleColumnTableViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 20
+        //Rows
+        let firstKey = dataSourceDictionary.keys.first;
+        let firstkeyArray = dataSourceDictionary[firstKey!];
+        let rows = firstkeyArray!.count;
+        return rows+1;
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        //Columns
+        let columns = dataSourceDictionary.keys.count;
+        return columns;
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -58,18 +66,35 @@ class MultipleColumnTableViewController: UICollectionViewController {
             cell.textLabel = cellLabel;
         }
     
+        //While this works, dictionaryKeys have a random order, so we need a keys array to preserve our order
+        //let dictionaryKeys = Array(dataSourceDictionary.keys) as! [String];
+        var currentColumnArray: [String] = [];
+        
         //Set the colors depending on the section
         if indexPath.section == 0 {
-            cell.backgroundColor = UIColor.darkGray
-            cell.textLabel?.textColor = UIColor.white
+            //It is the keys row
+            //Bold System blue on a white background has a more modern look than white text on gray backgrounds
+            //cell.backgroundColor = UIColor.darkGray
+            cell.textLabel?.textColor = UIColor.systemBlue
+            cell.textLabel!.font = UIFont.boldSystemFont(ofSize: cell.textLabel!.font.pointSize);
+            currentColumnArray = dataSourceKeys;
         
         } else {
             cell.backgroundColor = UIColor.white
             cell.textLabel?.textColor = UIColor.black
+            cell.textLabel!.font = UIFont.systemFont(ofSize: cell.textLabel!.font.pointSize);
+            //Get the first item for every key
+            for currentKey in dataSourceKeys {
+                let arrayForItem = dataSourceDictionary[currentKey];
+                let searchingIndex = indexPath.section-1 //The reason is that we added a key rows on top.
+                let currentItem = arrayForItem?[searchingIndex];
+                currentColumnArray.append(currentItem ?? "");
+            }
+            
         }
         
         //Last configure the cell text
-        cell.textLabel!.text = "section: \(indexPath.section) && row: \(indexPath.row)";
+        cell.textLabel!.text = currentColumnArray[indexPath.row];
         
         return cell
     }

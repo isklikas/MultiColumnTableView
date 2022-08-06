@@ -8,8 +8,8 @@
 import UIKit
 
 class MultipleColumnLayout: UICollectionViewLayout {
-    let CELL_HEIGHT: CGFloat = 50
-    let CELL_WIDTH: CGFloat = 180
+    let CELL_HEIGHT: CGFloat = 50;
+    let CELL_WIDTH: CGFloat = 100;
     let navigationBarIsNecessary = false; //Change depending on if navigation bar is needed
     
     var cellAttributesDictionary = Dictionary<IndexPath, UICollectionViewLayoutAttributes>()

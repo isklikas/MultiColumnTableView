@@ -7,6 +7,32 @@
 
 import UIKit
 
+extension CALayer {
+    func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat) {
+        
+        let border = CALayer()
+        
+        switch edge {
+        case UIRectEdge.top:
+            border.frame = CGRect(x: 0, y: 0, width: frame.width, height: thickness)
+        
+        case UIRectEdge.bottom:
+            border.frame = CGRect(x:0, y: frame.height - thickness, width: frame.width, height:thickness)
+        
+        case UIRectEdge.left:
+            border.frame = CGRect(x:0, y:0, width: thickness, height: frame.height)
+        
+        case UIRectEdge.right:
+            border.frame = CGRect(x: frame.width - thickness, y: 0, width: thickness, height: frame.height)
+        
+        default: do {}
+        }
+        
+        border.backgroundColor = color.cgColor
+        addSublayer(border)
+    }
+}
+
 @IBDesignable
 class MultipleColumnCell: UICollectionViewCell {
     var textLabel: UILabel?
@@ -22,8 +48,9 @@ class MultipleColumnCell: UICollectionViewCell {
     }
     
     func setup() {
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.black.cgColor;
-        self.layer.cornerRadius = 5.0
+        self.layer.addBorder(edge: .top, color: .gray, thickness: 0.5)
+        //self.layer.borderWidth = 0.5
+        //self.layer.borderColor = UIColor.gray.cgColor;
+        //self.layer.cornerRadius = 5.0
     }
 }
