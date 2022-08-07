@@ -26,7 +26,7 @@ class MultipleColumnLayout: UICollectionViewLayout {
     override func prepare() {
         
         //Default value, so that the property is defined based on the iOS Version
-        var STATUS_BAR_HEIGHT = 10.0 as CGFloat;
+        var STATUS_BAR_HEIGHT = 20.0 as CGFloat;
         
         //Newest method first, based on Window Scene
         if #available(iOS 13.0, *) {
