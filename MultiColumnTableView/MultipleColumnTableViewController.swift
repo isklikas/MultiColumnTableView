@@ -20,7 +20,7 @@ class MultipleColumnTableViewController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        //Set a safe inset because the collection view has a tendency to cover the status bar by default, in child view controller situations (or others) this is not necessary.
+        //Set a safe inset because the collection view has a tendency to cover the status bar by default, and breaks on scroll. It should almost always be true, however I kept this as an option in case it breaks something.
         if (needsStatusInset) {
             var statusBarHeight = 0.0 as CGFloat;
             if #available(iOS 13.0, *) {
