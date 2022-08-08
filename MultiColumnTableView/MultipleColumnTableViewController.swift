@@ -11,6 +11,7 @@ private let reuseIdentifier = "MultipleColumnCell"
 
 class MultipleColumnTableViewController: UICollectionViewController {
     let dataSourceKeys: [String] = ["Name", "City", "Color", "Country"];
+    var needsStatusInset = true;
     var dataSourceDictionary:[String: Array] = ["Name":["John", "Mitch", "Kelly", "Alex"], "City":["Athens", "Tel Aviv", "Patras", "Paris"], "Color":["Red", "Blue", "Green", "Yellow"], "Country":["Greece", "Israel", "Greece", "France"]];
 
     override func viewDidLoad() {
@@ -19,16 +20,18 @@ class MultipleColumnTableViewController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        //Set a safe inset because the collection view has a tendency to cover the status bar by default
-        var statusBarHeight = 0.0 as CGFloat;
-        if #available(iOS 13.0, *) {
-            let scene = UIApplication.shared.connectedScenes.first as! UIWindowScene
-            statusBarHeight = (scene.statusBarManager?.statusBarFrame.height)!;
+        //Set a safe inset because the collection view has a tendency to cover the status bar by default, in child view controller situations (or others) this is not necessary.
+        if (needsStatusInset) {
+            var statusBarHeight = 0.0 as CGFloat;
+            if #available(iOS 13.0, *) {
+                let scene = UIApplication.shared.connectedScenes.first as! UIWindowScene
+                statusBarHeight = (scene.statusBarManager?.statusBarFrame.height)!;
+            }
+            else {
+                statusBarHeight = UIApplication.shared.statusBarFrame.height
+            }
+            self.collectionView!.contentInset.top = statusBarHeight;
         }
-        else {
-            statusBarHeight = UIApplication.shared.statusBarFrame.height
-        }
-        self.collectionView!.contentInset.top = statusBarHeight;
 
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
