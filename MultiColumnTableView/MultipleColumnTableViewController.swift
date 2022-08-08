@@ -105,7 +105,7 @@ class MultipleColumnTableViewController: UICollectionViewController {
         
         }
         else {
-            cell.backgroundColor = UIColor.white
+            //cell.backgroundColor = UIColor.white --Not needed because we want dark mode compatibility
             cell.textLabel?.textColor = UIColor.black
             let tableFont = UIFont.systemFont(ofSize: 15.0);
             cell.textLabel!.font = tableFont;
