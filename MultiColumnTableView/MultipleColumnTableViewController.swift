@@ -10,9 +10,9 @@ import UIKit
 private let reuseIdentifier = "MultipleColumnCell"
 
 class MultipleColumnTableViewController: UICollectionViewController {
-    let dataSourceKeys: [String] = ["Name", "City", "Color", "Country"];
+    let dataSourceKeys: [String] = ["Name", "City", "Color", "Country", "Team", "Age", "Phone"];
     var needsStatusInset = true;
-    var dataSourceDictionary:[String: Array] = ["Name":["John", "Mitch", "Kelly", "Alex"], "City":["Athens", "Tel Aviv", "Patras", "Paris"], "Color":["Red", "Blue", "Green", "Yellow"], "Country":["Greece", "Israel", "Greece", "France"]];
+    var dataSourceDictionary:[String: Array] = ["Name":["John", "Mitch", "Kelly", "Alex"], "City":["Athens", "Tel Aviv", "Patras", "Paris"], "Color":["Red", "Blue", "Green", "Yellow"], "Country":["Greece", "Israel", "Greece", "France"], "Team":["OSFP", "Dynamo", "AEK", "PSG"], "Age":["26", "24", "32", "50"], "Phone":["iPhone", "Android", "iPhone", ""]];
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,7 +109,14 @@ class MultipleColumnTableViewController: UICollectionViewController {
         }
         else {
             //cell.backgroundColor = UIColor.white --Not needed because we want dark mode compatibility
-            cell.textLabel?.textColor = UIColor.black
+            if self.traitCollection.userInterfaceStyle == .dark {
+                //It is in light mode
+                cell.textLabel?.textColor = UIColor.white;
+            }
+            else {
+                //It is in light mode
+                cell.textLabel?.textColor = UIColor.black
+            }
             let tableFont = UIFont.systemFont(ofSize: 15.0);
             cell.textLabel!.font = tableFont;
             //Get the first item for every key
