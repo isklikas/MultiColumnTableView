@@ -10,10 +10,40 @@ import UIKit
 private let reuseIdentifier = "MultipleColumnCell"
 
 class MultipleColumnTableViewController: UICollectionViewController {
-    let dataSourceKeys: [String] = ["Name", "City", "Color", "Country", "Team", "Age", "Phone"];
+    // Const variables
+    var multipleColumnsLayout: MultipleColumnLayout;
+    
+    //UI Properties
+    /// Basically, if the view should start below the Status Bar, needed when the view is the main view in the controller
     var needsStatusInset = true;
-    var dataSourceDictionary:[String: Array] = ["Name":["John", "Mitch", "Kelly", "Alex"], "City":["Athens", "Tel Aviv", "Patras", "Paris"], "Color":["Red", "Blue", "Green", "Yellow"], "Country":["Greece", "Israel", "Greece", "France"], "Team":["OSFP", "Dynamo", "AEK", "PSG"], "Age":["26", "24", "32", "50"], "Phone":["iPhone", "Android", "iPhone", ""]];
-
+    
+    /// In shrinked scenarios, or in case there are many columns, allow the shrinking of the cells
+    var reducesWidthOfCells = false;
+    
+    var dataSourceKeys: [String] = ["Name", "City", "Color", "Country"];
+    var dataSourceDictionary:[String: Array] = ["Name":["John", "Mitch", "Kelly", "Alex"], "City":["Athens", "Tel Aviv", "Patras", "Paris"], "Color":["Red", "Blue", "Green", "Yellow"], "Country":["Greece", "Israel", "Greece", "France"]];
+    
+    override init(collectionViewLayout layout: UICollectionViewLayout) {
+        if layout.isKind(of: MultipleColumnLayout.self) {
+            self.multipleColumnsLayout = layout as! MultipleColumnLayout
+            super.init(collectionViewLayout: layout)
+        }
+        else {
+            self.multipleColumnsLayout = MultipleColumnLayout();
+            super.init(collectionViewLayout: multipleColumnsLayout);
+        }
+    }
+    
+    init() {
+        self.multipleColumnsLayout = MultipleColumnLayout();
+        super.init(collectionViewLayout: multipleColumnsLayout);
+    }
+    
+    required init?(coder: NSCoder) {
+        self.multipleColumnsLayout = MultipleColumnLayout();
+        super.init(coder: coder);
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -50,14 +80,17 @@ class MultipleColumnTableViewController: UICollectionViewController {
         
         //Configure Custom Layout
         let multipleColumnView = self.collectionView;
-        let multipleColumnsLayout = MultipleColumnLayout();
         
         //In case the items are not enough to fill the screen, the cell size should be changed.
-        let screenWidth = UIScreen.main.bounds.width;
+        let screenWidth = self.view.superview?.frame.size.width ?? UIScreen.main.bounds.width;
         let defaultCellWidth = multipleColumnsLayout.CELL_WIDTH;
         let widthNeeded = defaultCellWidth * CGFloat(dataSourceKeys.count);
         
         if (widthNeeded < screenWidth) {
+            let configuredWidth = screenWidth / CGFloat(dataSourceKeys.count);
+            multipleColumnsLayout.CELL_WIDTH = configuredWidth;
+        }
+        else if (widthNeeded > screenWidth && reducesWidthOfCells) {
             let configuredWidth = screenWidth / CGFloat(dataSourceKeys.count);
             multipleColumnsLayout.CELL_WIDTH = configuredWidth;
         }
@@ -110,7 +143,7 @@ class MultipleColumnTableViewController: UICollectionViewController {
         else {
             //cell.backgroundColor = UIColor.white --Not needed because we want dark mode compatibility
             if self.traitCollection.userInterfaceStyle == .dark {
-                //It is in light mode
+                //It is in dark mode
                 cell.textLabel?.textColor = UIColor.white;
             }
             else {
